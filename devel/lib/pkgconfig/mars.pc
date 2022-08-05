@@ -1,0 +1,8 @@
+prefix=/home/oguz/mission_mars/devel
+
+Name: mars
+Description: Description of mars
+Version: 0.0.0
+Cflags: -I/home/oguz/mission_mars/devel/include
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy std_msgs message_runtime

@@ -1,0 +1,2 @@
+mars
+-DCATKIN_DEVEL_PREFIX=/home/oguz/mission_mars/devel -DCMAKE_INSTALL_PREFIX=/home/oguz/mission_mars/install -G Unix Makefiles
