@@ -28,6 +28,7 @@
 
       double time_new, time_intervall,time_last;
       int counter; 
+      double radar_covariance;
 
       //  message_filters::Subscriber<geometry_msgs::TwistWithCovarianceStamped> radar_subs;
       //  message_filters::Cache<geometry_msgs::TwistWithCovarianceStamped> cache;
@@ -48,8 +49,25 @@
         ~Sensor(){};
 
         void sample_position(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& msg){
-            position_estimated.point.x = (position_radar.pose.pose.position.x *  position_radar.pose.covariance[0]) + (msg->pose.pose.position.x * msg->pose.covariance[0]);
-            std::cout  << "Position  2:  "<< msg->pose.pose.position.x<< std::endl;     
+            position_estimated.header = msg->header;
+  
+            //this->radar_covariance = position_radar.pose.covariance[0];
+
+            //measurement
+            double diff = msg->pose.pose.position.x - position_radar.pose.pose.position.x;
+            double Kalman_Gain  = position_radar.pose.covariance[0]/ (msg->pose.covariance[0]+position_radar.pose.covariance[0]);
+            // Update
+            position_estimated.point.x = msg->pose.pose.position.x + (Kalman_Gain * diff);
+            //this->radar_covariance = (1 - Kalman_Gain) * position_radar.pose.covariance[0];
+
+
+            //position_estimated.point.x = (position_radar.pose.pose.position.x *  position_radar.pose.covariance[0]) + (msg->pose.pose.position.x * msg->pose.covariance[0]);
+            //position_estimated.point.x = (position_radar.pose.pose.position.x *  position_radar.pose.covariance[0]) + (msg->pose.pose.position.x * msg->pose.covariance[0]);
+            std::cout  << "Position  predict:  "<< position_radar.pose.pose.position.x<< std::endl;    
+            std::cout  << "Position  measurement:  "<< msg->pose.pose.position.x<< std::endl;     
+
+            std::cout  << "Position  Update:  "<< position_estimated.point.x<< std::endl;     
+
             pub_position.publish(position_estimated);    
         }
 
@@ -64,25 +82,25 @@
         // }
 
           void radar(const geometry_msgs::TwistWithCovarianceStamped::ConstPtr& msg_radar){
-              
-            // if(counter  == 0){
-            //   this->time_last = msg_radar->header.stamp.toSec();
-            // }else{
-            //   position_radar.header = msg_radar->header;
-            //    position_radar.pose.covariance = msg_radar->twist.covariance;
-            //  this->time_new = msg_radar->header.stamp.toSec();
-            //   this->time_intervall = (this->time_new - this->time_last);
-            // // std::cout << "time_new  :: " << time_new << std::endl;
-            //  //std::cout << "time intervall :: " << time_intervall << std::endl;
-            //  // std::cout << " msg_radar->twist.twist.linear.x :: " << msg_radar->twist.twist.linear.x << std::endl;
-            //  this->position_radar.pose.pose.position.x += ((msg_radar->twist.twist.linear.x * time_intervall)  );
-            //   // std::cout  << "distance  :  "<< (msg_radar->twist.twist.linear.x * time_intervall) << std::endl;   
-            //    std::cout  << "Position  :  "<<  this->position_radar.pose.pose.position.x << std::endl;   
-            //   this->time_last = this->time_new;  
-            //    // std::cout << "time_last :: " << this->time_last << std::endl;
-            // }
+              // Predict
+            if(counter  == 0){
+              this->time_last = msg_radar->header.stamp.toSec();
+            }else{
+              position_radar.header = msg_radar->header;
+              position_radar.pose.covariance = msg_radar->twist.covariance;
+              this->time_new = msg_radar->header.stamp.toSec();
+              this->time_intervall = (this->time_new - this->time_last);
+            // std::cout << "time_new  :: " << time_new << std::endl;
+             //std::cout << "time intervall :: " << time_intervall << std::endl;
+             // std::cout << " msg_radar->twist.twist.linear.x :: " << msg_radar->twist.twist.linear.x << std::endl;
+              this->position_radar.pose.pose.position.x += ((msg_radar->twist.twist.linear.x * time_intervall)  );
+              // std::cout  << "distance  :  "<< (msg_radar->twist.twist.linear.x * time_intervall) << std::endl;   
+              // std::cout  << "Position  :  "<<  this->position_radar.pose.pose.position.x << std::endl;   
+              this->time_last = this->time_new;  
+               // std::cout << "time_last :: " << this->time_last << std::endl;
+            }
             counter++;
-             //std::cout << "radar vel " << msg_radar->twist.twist.linear.x <<  std::endl;
+            //  std::cout << "radar vel " << msg_radar->twist.twist.linear.x <<  std::endl;
             // std::cout << "Last time received is " << cache.getLatestTime() << std::endl << std::endl;
         }
 
