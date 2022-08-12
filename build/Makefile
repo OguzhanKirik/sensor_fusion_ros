@@ -770,19 +770,6 @@ mars_genpy/fast:
 .PHONY : mars_genpy/fast
 
 #=============================================================================
-# Target rules for targets named ir_positions
-
-# Build rule for target.
-ir_positions: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ir_positions
-.PHONY : ir_positions
-
-# fast build rule for target.
-ir_positions/fast:
-	$(MAKE) $(MAKESILENT) -f mars/CMakeFiles/ir_positions.dir/build.make mars/CMakeFiles/ir_positions.dir/build
-.PHONY : ir_positions/fast
-
-#=============================================================================
 # Target rules for targets named sensor_fusion
 
 # Build rule for target.
@@ -854,7 +841,6 @@ help:
 	@echo "... gmock_main"
 	@echo "... gtest"
 	@echo "... gtest_main"
-	@echo "... ir_positions"
 	@echo "... sensor_fusion"
 .PHONY : help
 

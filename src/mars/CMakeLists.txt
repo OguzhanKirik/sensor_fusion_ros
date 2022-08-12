@@ -55,13 +55,9 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 
 
 
-
-
-add_executable(ir_positions src/ir_positions.cpp)
-target_link_libraries(ir_positions ${catkin_LIBRARIES})
-#add_dependencies(ir_position ir_positions_generates_messages_gencpp)
-
+# add_executable(ir_positions src/ir_positions.cpp)
+# target_link_libraries(ir_positions ${catkin_LIBRARIES})
+# #add_dependencies(ir_position ir_positions_generates_messages_gencpp)
 
 add_executable(sensor_fusion src/sensor_fusion.cpp)
 target_link_libraries(sensor_fusion ${catkin_LIBRARIES})
-#add_dependencies(ir_position ir_positions_generates_messages_gencpp)

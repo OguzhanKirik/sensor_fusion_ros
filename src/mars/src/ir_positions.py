@@ -26,8 +26,7 @@ class ir_positions:
             arr.pose.pose.position.x = 1.9
         else:
             print("something")
-        
-        print("{} position beam is received and converted".format(msg.beam_index))
+        rospy.loginfo("{} position beam is received and converted".format(msg.beam_index))
         self.pub.publish(arr)        
 
 

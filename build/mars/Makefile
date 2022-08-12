@@ -690,20 +690,6 @@ mars_genpy/fast:
 .PHONY : mars_genpy/fast
 
 # Convenience name for target.
-mars/CMakeFiles/ir_positions.dir/rule:
-	cd /home/oguz/mission_mars/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mars/CMakeFiles/ir_positions.dir/rule
-.PHONY : mars/CMakeFiles/ir_positions.dir/rule
-
-# Convenience name for target.
-ir_positions: mars/CMakeFiles/ir_positions.dir/rule
-.PHONY : ir_positions
-
-# fast build rule for target.
-ir_positions/fast:
-	cd /home/oguz/mission_mars/build && $(MAKE) $(MAKESILENT) -f mars/CMakeFiles/ir_positions.dir/build.make mars/CMakeFiles/ir_positions.dir/build
-.PHONY : ir_positions/fast
-
-# Convenience name for target.
 mars/CMakeFiles/sensor_fusion.dir/rule:
 	cd /home/oguz/mission_mars/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mars/CMakeFiles/sensor_fusion.dir/rule
 .PHONY : mars/CMakeFiles/sensor_fusion.dir/rule
@@ -716,30 +702,6 @@ sensor_fusion: mars/CMakeFiles/sensor_fusion.dir/rule
 sensor_fusion/fast:
 	cd /home/oguz/mission_mars/build && $(MAKE) $(MAKESILENT) -f mars/CMakeFiles/sensor_fusion.dir/build.make mars/CMakeFiles/sensor_fusion.dir/build
 .PHONY : sensor_fusion/fast
-
-src/ir_positions.o: src/ir_positions.cpp.o
-.PHONY : src/ir_positions.o
-
-# target to build an object file
-src/ir_positions.cpp.o:
-	cd /home/oguz/mission_mars/build && $(MAKE) $(MAKESILENT) -f mars/CMakeFiles/ir_positions.dir/build.make mars/CMakeFiles/ir_positions.dir/src/ir_positions.cpp.o
-.PHONY : src/ir_positions.cpp.o
-
-src/ir_positions.i: src/ir_positions.cpp.i
-.PHONY : src/ir_positions.i
-
-# target to preprocess a source file
-src/ir_positions.cpp.i:
-	cd /home/oguz/mission_mars/build && $(MAKE) $(MAKESILENT) -f mars/CMakeFiles/ir_positions.dir/build.make mars/CMakeFiles/ir_positions.dir/src/ir_positions.cpp.i
-.PHONY : src/ir_positions.cpp.i
-
-src/ir_positions.s: src/ir_positions.cpp.s
-.PHONY : src/ir_positions.s
-
-# target to generate assembly for a file
-src/ir_positions.cpp.s:
-	cd /home/oguz/mission_mars/build && $(MAKE) $(MAKESILENT) -f mars/CMakeFiles/ir_positions.dir/build.make mars/CMakeFiles/ir_positions.dir/src/ir_positions.cpp.s
-.PHONY : src/ir_positions.cpp.s
 
 src/sensor_fusion.o: src/sensor_fusion.cpp.o
 .PHONY : src/sensor_fusion.o
@@ -815,11 +777,7 @@ help:
 	@echo "... std_msgs_generate_messages_lisp"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
-	@echo "... ir_positions"
 	@echo "... sensor_fusion"
-	@echo "... src/ir_positions.o"
-	@echo "... src/ir_positions.i"
-	@echo "... src/ir_positions.s"
 	@echo "... src/sensor_fusion.o"
 	@echo "... src/sensor_fusion.i"
 	@echo "... src/sensor_fusion.s"
