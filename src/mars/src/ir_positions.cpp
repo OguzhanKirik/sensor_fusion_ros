@@ -12,7 +12,6 @@ class ir_positions{
         ros::Subscriber sub;
         ros::Publisher pub;
         const float cov_x = 0.0025;
-        //geometry_msgs::PoseWithCovarianceStamped arr; 
 
     public:
         ir_positions(ros::NodeHandle& n){
