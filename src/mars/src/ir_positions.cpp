@@ -3,8 +3,6 @@
 
 #include "mars/IRStamped.h"
 #include "geometry_msgs/PoseWithCovarianceStamped.h"
-//#include "mars/convert_pose.h"
-
 
 
 class ir_positions{
